@@ -27,6 +27,14 @@ Prep AI is an AI-powered interview preparation assistant that integrates special
 - Integration with Vector DB for context-based answers
 - Parallel processing of queries for efficiency
 
+## Video Overview
+
+Check out our video overview of the PrepAI Chatbot to see the DSA AI Agent in action and learn more about its features and capabilities:
+
+[![PrepAI Chatbot Overview](https://img.youtube.com/vi/Zg_cl5VYHJ0/0.jpg)](https://youtu.be/Zg_cl5VYHJ0)
+
+This video provides a comprehensive walkthrough of the DSA AI Agent, showcasing its ability to solve data structures and algorithm problems, provide step-by-step explanations, suggest optimizations, and execute code snippets for validation. Watch to understand how the DSA AI Agent can enhance your interview preparation experience.
+
 ## Setup
 1. Clone the repository:
    ```bash
