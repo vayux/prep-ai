@@ -1,68 +1,104 @@
 # PrepAI Chatbot
 
-PrepAI Chatbot is an open-source AI-powered interview preparation tool designed to help users practice coding questions and receive AI-generated feedback. It leverages advanced language models to provide precise, well-structured answers.
+PrepAI Chatbot is an open-source, AI-powered interview preparation tool designed to help users practice coding questions and receive AI-generated feedback. It leverages cutting-edge AI models to provide structured, insightful, and optimized answers.
 
-## Objective
-Prep AI is an advanced interview preparation assistant that leverages multiple AI models and Retrieval-Augmented Generation (RAG) systems to help users prepare for technical and behavioral interviews. It consists of specialized AI models for different aspects of interviews and a super-agent chatbot that integrates them seamlessly.
+## 🚀 Overview
+This chatbot application is built using **Streamlit** and **LangGraph**. It employs a **Retrieval-Augmented Generation (RAG) agent** to answer user queries by prioritizing responses from a knowledge base. If a suitable answer is not found, it falls back to a **Large Language Model (LLM)**. The conversation history is preserved, ensuring both user questions and AI responses are accessible.
 
-## Project Summary
-Prep AI is an AI-powered interview preparation assistant that integrates specialized models for Data Structures & Algorithms (DSA), Low-Level Design (LLD), High-Level Design (HLD), and Behavioral interviews. It leverages a super-agent chatbot that intelligently selects the most suitable model based on user queries. The system employs Retrieval-Augmented Generation (RAG) for enhanced accuracy and offers an interactive UI using Streamlit. Open-source technologies like Ollama, LangChain, FAISS, and LangGraph enable efficient AI model execution. The project follows a microservices architecture, ensuring scalability and modular deployment with cloud-based GPU instances. Future enhancements include voice-based interactions, real interviewer mode, and enterprise integrations.
+## 🎯 Objective
+**Prep AI** is a next-generation interview preparation assistant that integrates multiple AI models and RAG-based retrieval systems. It specializes in **technical and behavioral interview coaching**, featuring dedicated AI agents for different aspects of interview preparation.
 
-## Project Requirements
-1. **Core Functionalities**
-   - **DSA AI Agent**: Solves data structures and algorithm problems, provides step-by-step explanations, suggests optimizations, and executes code snippets for validation.
-   - **LLD AI Agent**: Helps with low-level design questions, providing class diagrams, design patterns, and best practices using tools like Mermaid.js.
-   - **HLD AI Agent**: Assists with high-level system design, discussing architectures, scalability, and trade-offs, and generating system component diagrams.
-   - **Behavioral AI Agent**: Guides users through behavioral interviews, offering STAR framework responses, analyzing responses, and providing AI-driven feedback.
-   - **Super-Agent Chatbot**: Integrates all specialized models to provide a seamless interview prep experience by intelligently routing queries.
-   - **Automatic Model Selection**: The chatbot automatically determines the most suitable AI model (DSA, LLD, HLD, or Behavioral) based on the user's question using a rule-based or ML classifier.
-   - **Custom RAG Pipelines**: Enhances accuracy by retrieving relevant information from interview question-answer datasets using FAISS or Milvus.
-   - **User Feedback System**: Collects feedback to refine AI responses and improve model accuracy over time.
-   - **Interactive Mock Interviews**: Simulates real interview environments with AI-driven question generation and evaluation.
-   - **Voice Interaction Agent (Future Scope)**: Enables voice-based interview practice using Whisper for transcription and LLMs for response generation.
-   - **User Interface (UI)**: Provides a user-friendly interface using Streamlit or similar frameworks for seamless interaction with AI models.
+## 🏗 Project Summary
+Prep AI combines **specialized AI models** for:
+- **Data Structures & Algorithms (DSA)**
+- **Low-Level Design (LLD)**
+- **High-Level Design (HLD)**
+- **Behavioral Interviews**
 
-## Features
-- AI-powered responses to coding questions
-- Integration with Vector DB for context-based answers
-- Parallel processing of queries for efficiency
+These models are orchestrated under a **super-agent chatbot**, which intelligently selects the most relevant model based on user input. The chatbot leverages RAG pipelines for enhanced accuracy and ensures a seamless, interactive experience through **Streamlit**. 
 
-## Video Overview
+Technologies used:
+- **Ollama** for local LLM inference
+- **LangChain & LangGraph** for orchestration
+- **FAISS** for vector-based knowledge retrieval
+- **Microservices architecture** for scalability and modular deployment
+- **Cloud-based GPU instances** for performance optimization
 
-Check out our video overview of the PrepAI Chatbot to see the DSA AI Agent in action and learn more about its features and capabilities:
+### 🔮 Future Enhancements
+- **Voice-Based Interactions**: Enabling voice-driven interview simulations
+- **Real Interviewer Mode**: AI-driven interviewer simulation for a realistic experience
+- **Enterprise Integrations**: Custom AI training for corporate interview preparation
 
-[![PrepAI Chatbot Overview](https://img.youtube.com/vi/Zg_cl5VYHJ0/0.jpg)](https://youtu.be/Zg_cl5VYHJ0)
+---
 
-This video provides a comprehensive walkthrough of the DSA AI Agent, showcasing its ability to solve data structures and algorithm problems, provide step-by-step explanations, suggest optimizations, and execute code snippets for validation. Watch to understand how the DSA AI Agent can enhance your interview preparation experience.
+## 🔥 Key Features
+✅ AI-powered responses for coding and design questions  
+✅ Integration with **Vector Databases** for context-aware responses  
+✅ **Automatic Model Selection** for optimized query handling  
+✅ **Mock Interview Simulations** for real-world practice  
+✅ **User Feedback System** to enhance model accuracy  
+✅ **Voice Interaction Agent (Upcoming Feature)**  
 
-## Setup
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd prep-ai
-   ```
-3. Install dependencies:
-   ```bash
-   poetry install
-   ```
-4. Format the code using Black:
-   ```bash
-   poetry run black .
-   ```
-5. Run the chatbot:
-   ```bash
-   streamlit run ui/chatbot.py
-   ```
+## 📽 Video Overview
 
-## Usage
-- Ask any coding-related question in the chat interface.
-- Receive AI-generated answers based on the context from the Vector DB and LLM.
+Check out our **video walkthrough** to see Prep AI in action:
 
-## Contributing
-We welcome contributions! Please see `CONTRIBUTING.md` for more details.
+[![PrepAI Chatbot Overview](https://img.youtube.com/vi/Zg_cl5VYHJ0/0.jpg)](https://youtu.be/9yugsgBXoOg)
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This video highlights the **DSA AI Agent**, showcasing its ability to:
+- Solve **Data Structures & Algorithm** problems
+- Provide **step-by-step explanations**
+- Suggest **code optimizations**
+- Execute **code snippets for validation**
+
+📌 *Watch now to experience Prep AI in action!*
+
+---
+
+## 🛠 Setup Instructions
+
+### 1️⃣ Clone the Repository
+```bash
+git clone <repository-url>
+```
+
+### 2️⃣ Navigate to the Project Directory
+```bash
+cd prep-ai
+```
+
+### 3️⃣ Install Dependencies
+```bash
+poetry install
+```
+
+### 4️⃣ Format Code using Black
+```bash
+poetry run black .
+```
+
+### 5️⃣ Run the Chatbot
+```bash
+streamlit run ui/chatbot.py
+```
+
+---
+
+## 🎯 Usage
+- Type any **coding, design, or behavioral interview question** in the chat interface.
+- The AI intelligently selects the **best agent** to respond.
+- If the knowledge base lacks an answer, the system falls back to an **LLM**.
+
+---
+
+## 🤝 Contributing
+We **welcome contributions!** Please check out [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on how to get involved.
+
+---
+
+## 📜 License
+This project is **open-source** under the **MIT License**. See [`LICENSE`](LICENSE) for details.
+
+---
+
+💡 *Join us in redefining interview preparation with AI!* 🚀
