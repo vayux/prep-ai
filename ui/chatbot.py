@@ -45,9 +45,7 @@ if user_input:
                 st.markdown(f"**LLM Answer:**\n\n{llm_answer}")
 
             # Append response to session state
-            st.session_state["messages"].append(
-                {"role": "assistant", "content": f"**LLM Answer:**\n\n{llm_answer}"}
-            )
+            st.session_state["messages"].append({"role": "assistant", "content": f"**LLM Answer:**\n\n{llm_answer}"})
 
         # Vector DB response
         with st.chat_message("assistant"):

@@ -21,9 +21,7 @@ logging.basicConfig(level=logging.INFO)
 try:
     DATA_FILE = "data/DSA.md"
     if not os.path.exists(DATA_FILE):
-        raise FileNotFoundError(
-            f"Data file '{DATA_FILE}' not found. Please add your dataset."
-        )
+        raise FileNotFoundError(f"Data file '{DATA_FILE}' not found. Please add your dataset.")
 except FileNotFoundError as e:
     logging.error(e)
     raise
@@ -60,9 +58,7 @@ def split_texts(documents, chunk_size=1000, chunk_overlap=100):
     Returns:
     list: A list of text chunks.
     """
-    text_splitter = CharacterTextSplitter(
-        chunk_size=chunk_size, chunk_overlap=chunk_overlap
-    )
+    text_splitter = CharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     return text_splitter.split_documents(documents)
 
 

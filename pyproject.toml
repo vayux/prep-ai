@@ -9,7 +9,7 @@ packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-langchain = "*"
+langchain = "^0.3.20"
 sentence-transformers = "*"
 ollama = "*"
 streamlit = "*"
@@ -17,6 +17,7 @@ langchain-community = "^0.3.19"
 faiss-cpu = "^1.10.0"
 pytest = "^8.3.5"
 pylint = "^3.3.4"
+flake8 = "^7.1.2"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.3.4"

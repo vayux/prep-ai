@@ -1,13 +1,11 @@
-import os
 import logging
-from concurrent.futures import ThreadPoolExecutor
-
-from langchain.llms import Ollama
-from langchain_community.vectorstores import FAISS
-from langchain.embeddings import SentenceTransformerEmbeddings
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
+import os
 import faiss
+
+from langchain.chains import RetrievalQA
+from langchain_community.vectorstores import FAISS
+from langchain.llms import Ollama
+from langchain.embeddings import SentenceTransformerEmbeddings
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -18,9 +16,7 @@ embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
 # Load FAISS index with GPU support
 try:
     if os.path.exists("faiss_index"):
-        vectorstore = FAISS.load_local(
-            "faiss_index", embeddings, allow_dangerous_deserialization=True
-        )
+        vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
         index = vectorstore.index  # Extract FAISS index
 
         # Check for GPU availability and move FAISS index to GPU if available
@@ -32,9 +28,7 @@ try:
         else:
             logging.warning("No GPU available, running FAISS on CPU.")
 
-        retriever = vectorstore.as_retriever(
-            search_type="similarity", search_kwargs={"k": 3}
-        )
+        retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3})
     else:
         raise FileNotFoundError("FAISS index not found. Please create the index first.")
 except FileNotFoundError as e:
@@ -44,9 +38,7 @@ except Exception as e:
     logging.error(f"Unexpected error: {e}")
     raise
 
-qa_chain = RetrievalQA.from_chain_type(
-    llm=Ollama(model="llama3:latest"), chain_type="stuff", retriever=retriever
-)
+qa_chain = RetrievalQA.from_chain_type(llm=Ollama(model="llama3:latest"), chain_type="stuff", retriever=retriever)
 
 # Query Functions
 # Define functions to query the chatbot.
