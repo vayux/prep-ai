@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "prep-ai"
+version = "0.1.0"
+description = "An open-source AI-powered interview preparation chatbot"
+authors = ["Pulkit Agrawal <agrawal.pulkit1994@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+langchain = "*"
+sentence-transformers = "*"
+ollama = "*"
+streamlit = "*"
+langchain-community = "^0.3.19"
+faiss-cpu = "^1.10.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
