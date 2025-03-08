@@ -48,7 +48,11 @@ This video provides a comprehensive walkthrough of the DSA AI Agent, showcasing 
    ```bash
    poetry install
    ```
-4. Run the chatbot:
+4. Format the code using Black:
+   ```bash
+   poetry run black .
+   ```
+5. Run the chatbot:
    ```bash
    streamlit run ui/chatbot.py
    ```
