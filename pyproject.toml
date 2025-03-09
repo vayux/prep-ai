@@ -20,6 +20,7 @@ pylint = "^3.3.4"
 flake8 = "^7.1.2"
 langgraph = "^0.3.5"
 langsmith = "^0.3.13"
+streamlit-ace = "^0.1.1"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.3.4"
