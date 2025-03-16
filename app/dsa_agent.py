@@ -1,6 +1,6 @@
 import logging
 from langchain.llms import Ollama
-from crewai import Agent, Task
+from langchain.chains import RetrievalQA
 from app.retriever import Retriever
 from app.config import LLM_MODEL
 
@@ -9,32 +9,33 @@ logging.basicConfig(level=logging.INFO)
 
 class DSA:
     def __init__(self):
-        """Initializes the DSA Agent with a dedicated FAISS index and CrewAI integration."""
         self.retriever = Retriever()
-        self.faiss_index = "faiss_index/dsa"
-        self.llm = Ollama(model=LLM_MODEL)
+        self.qa_chain = None
+        self.initialize_qa()
 
-        # CrewAI Agent
-        self.agent = Agent(
-            name="DSA AI",
-            role="Data Structures & Algorithms Expert",
-            model=self.llm,
-            description="Solves DSA problems, explains solutions, and optimizes code."
+    def initialize_qa(self):
+        """Initialize Retrieval-Augmented Generation (RAG)."""
+        retriever = self.retriever.load_faiss_index()
+        self.qa_chain = RetrievalQA.from_chain_type(
+            llm=Ollama(model=LLM_MODEL), chain_type="stuff", retriever=retriever
         )
 
     def query_rag(self, question):
-        """Query the FAISS RAG model before task execution."""
-        logging.info(f"DSA Agent retrieving relevant documents for: {question}")
+        """Query the RAG model and determine sufficiency."""
+        response = self.qa_chain.run(question)
 
-        retrieved_docs = self.retriever.retrieve_for_agent("DSA", question)
-        context = "\n".join(retrieved_docs)
+        # Implement your sufficiency logic here.
+        is_sufficient = self.is_response_sufficient(response)
 
-        task_description = f"Use the following retrieved knowledge to solve this DSA problem:\n{context}\n\nProblem: {question}"
-        task = Task(description=task_description, agent=self.agent)
-
-        response = task.execute()
-        is_sufficient = len(response.strip()) > 10 and "I don't know" not in response
         return response, is_sufficient
+
+    def is_response_sufficient(self, response):
+        """Determines if the RAG response is sufficient."""
+        # Example: Check if the response is too short or contains "I don't know".
+        if len(response.strip()) < 10 or "I don't know" in response:
+            return False
+        else:
+            return True
 
 
 dsa_agent = DSA()

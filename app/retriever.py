@@ -11,69 +11,38 @@ logging.basicConfig(level=logging.INFO)
 
 class Retriever:
     def __init__(self):
-        self.vectorstores = {}
+        self.vectorstore = None
 
-    def load_documents(self, data_file):
-        """Load documents from the specified data file."""
-        if not os.path.exists(data_file):
-            raise FileNotFoundError(f"Data file '{data_file}' not found.")
-        loader = TextLoader(data_file)
+    def load_documents(self):
+        """Load documents from file."""
+        if not os.path.exists(DATA_FILE):
+            raise FileNotFoundError(f"Data file '{DATA_FILE}' not found.")
+        loader = TextLoader(DATA_FILE)
         return loader.load()
 
     def split_texts(self, documents):
-        """Split documents into chunks for better retrieval."""
+        """Split documents into chunks."""
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
         return text_splitter.split_documents(documents)
 
-    def create_faiss_index(self, agent_type, data_file, index_path):
-        """Create a FAISS index for a specific agent and save it."""
-        logging.info(f"Creating FAISS index for {agent_type}...")
-
-        documents = self.load_documents(data_file)
-        texts = self.split_texts(documents)
-
+    def create_faiss_index(self, texts):
+        """Create FAISS index and save it."""
         vectorstore = FAISS.from_documents(texts, embeddings)
-        vectorstore.save_local(index_path)
-        self.vectorstores[agent_type] = vectorstore
+        vectorstore.save_local(FAISS_INDEX_PATH)
+        self.vectorstore = vectorstore
+        logging.info("✅ FAISS index created successfully!")
 
-        logging.info(f"✅ {agent_type} FAISS index created successfully at {index_path}!")
-
-    def load_faiss_index(self, agent_type, index_path):
-        """Load a FAISS index for a specific agent."""
-        if os.path.exists(index_path):
-            self.vectorstores[agent_type] = FAISS.load_local(index_path, embeddings, allow_dangerous_deserialization=True)
-            return self.vectorstores[agent_type].as_retriever(search_type="similarity", search_kwargs={"k": 3})
+    def load_faiss_index(self):
+        """Load FAISS index if it exists."""
+        if os.path.exists(FAISS_INDEX_PATH):
+            self.vectorstore = FAISS.load_local(FAISS_INDEX_PATH, embeddings, allow_dangerous_deserialization=True)
+            return self.vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 3})
         else:
-            raise FileNotFoundError(f"FAISS index for {agent_type} not found. Please create the index first.")
-
-    def retrieve_for_agent(self, agent_type, query):
-        """Retrieve relevant information for a specific agent."""
-        if agent_type not in self.vectorstores:
-            raise ValueError(f"Retriever for {agent_type} is not initialized.")
-
-        retriever = self.vectorstores[agent_type].as_retriever(search_type="similarity", search_kwargs={"k": 3})
-        results = retriever.get_relevant_documents(query)
-        
-        return [doc.page_content for doc in results] if results else ["No relevant data found."]
+            raise FileNotFoundError("FAISS index not found. Please create the index first.")
 
 
-# 🔥 Initialize retriever and create separate indexes for each AI agent
 if __name__ == "__main__":
     retriever = Retriever()
-
-    agent_data_files = {
-        "DSA": "data/dsa_data.md",
-        "LLD": "data/lld_data.md",
-        "HLD": "data/hld_data.md",
-        "Behavioral": "data/behavioral_data.md",
-    }
-
-    agent_indexes = {
-        "DSA": "faiss_index/dsa",
-        "LLD": "faiss_index/lld",
-        "HLD": "faiss_index/hld",
-        "Behavioral": "faiss_index/behavioral",
-    }
-
-    for agent, data_file in agent_data_files.items():
-        retriever.create_faiss_index(agent, data_file, agent_indexes[agent])
+    documents = retriever.load_documents()
+    texts = retriever.split_texts(documents)
+    retriever.create_faiss_index(texts)
