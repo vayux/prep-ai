@@ -8,25 +8,28 @@ readme = "README.md"
 packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
+python = ">=3.10,<3.12"
 langchain = "^0.3.20"
 sentence-transformers = "*"
 ollama = "*"
 streamlit = "*"
 langchain-community = "^0.3.19"
-faiss-cpu = "^1.10.0"
 pytest = "^8.3.5"
 pylint = "^3.3.4"
 flake8 = "^7.1.2"
 langgraph = "^0.3.5"
 langsmith = "^0.3.13"
 streamlit-ace = "^0.1.1"
+crewai = "^0.105.0"
+faiss-cpu = "1.7.3"
+numpy = "1.26.2"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.3.4"
 autopep8 = "^2.3.2"
 black = "^25.1.0"
 ruff = "^0.9.10"
+numpy = "<2"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
